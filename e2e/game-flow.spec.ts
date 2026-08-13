@@ -40,16 +40,17 @@ test("mantém os indicadores da tela ready afastados das bordas em 375px", async
   const summary = page.getByRole("region", { name: "Resumo da partida" });
 
   for (const label of ["Jogadores", "Rodadas", "Segundos"]) {
-    const card = summary.getByText(label, { exact: true }).locator("..");
+    const card = summary
+      .getByText(label, { exact: true })
+      .locator("xpath=ancestor::*[@data-stat-pill]");
     const spacing = await card.evaluate((element) => {
       const cardBox = element.getBoundingClientRect();
-      const labelElement = element.children.item(1);
-      const labelBox = labelElement?.getBoundingClientRect();
+      const headerBox = element.children.item(0)?.getBoundingClientRect();
 
-      return labelBox
+      return headerBox
         ? {
-            left: labelBox.left - cardBox.left,
-            right: cardBox.right - labelBox.right,
+            left: headerBox.left - cardBox.left,
+            right: cardBox.right - headerBox.right,
           }
         : null;
     });
