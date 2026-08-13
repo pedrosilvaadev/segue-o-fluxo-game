@@ -35,6 +35,7 @@ teach the rules to first-time groups.
 - Configurable 30, 45, or 60-second timer.
 - Drift-resistant timer recovery after refresh, based on an absolute `endsAt`
   timestamp.
+- Early timer completion when everyone answers before time runs out.
 - 126 local questions spread across nine categories.
 - Fisher–Yates question selection with repetition prevention.
 - Flexible scoring from 0 to 3 points per player and round.

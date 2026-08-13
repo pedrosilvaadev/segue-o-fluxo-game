@@ -123,6 +123,25 @@ test("recupera rodada e timer em andamento após refresh", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Revelar respostas" })).toBeVisible();
 });
 
+test("permite finalizar o timer antes do tempo acabar", async ({ page }) => {
+  await createFiveRoundGame(page);
+
+  await page.getByRole("button", { name: "Iniciar timer" }).click();
+  await expect(page.getByText("Todo mundo já respondeu?")).toBeVisible();
+  await page.getByRole("button", { name: "Finalizar timer" }).click();
+
+  await expect(page.getByText("00:00", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Revelar respostas" }),
+  ).toBeVisible();
+
+  await page.reload();
+  await expect(page.getByText("00:00", { exact: true })).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Revelar respostas" }),
+  ).toBeVisible();
+});
+
 test("reinicia uma partida ativa do zero somente após confirmação", async ({
   page,
 }) => {

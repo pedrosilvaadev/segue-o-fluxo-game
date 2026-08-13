@@ -121,6 +121,23 @@ describe("game store", () => {
     expect(useGameStore.getState().game?.timer.status).toBe("finished");
   });
 
+  it("finishes a running timer early and persists the final timestamp", () => {
+    createConfiguredGame();
+    useGameStore.getState().startGame();
+
+    expect(() => useGameStore.getState().finishTimer()).toThrow(
+      "precisa estar em andamento",
+    );
+
+    useGameStore.getState().startTimer(1_000);
+    useGameStore.getState().finishTimer(5_000);
+
+    expect(useGameStore.getState().game?.timer).toEqual({
+      status: "finished",
+      endsAt: 5_000,
+    });
+  });
+
   it("reopens setup from a restarted ready game", () => {
     createConfiguredGame();
     useGameStore.getState().startGame();

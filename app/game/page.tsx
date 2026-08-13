@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Eye, Play, RefreshCw } from "lucide-react";
+import { Eye, Play, RefreshCw, Square } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -22,6 +22,7 @@ export default function GamePage() {
   const game = useGameStore((state) => state.game);
   const hasHydrated = useGameStore((state) => state.hasHydrated);
   const startTimer = useGameStore((state) => state.startTimer);
+  const finishTimer = useGameStore((state) => state.finishTimer);
   const changeQuestion = useGameStore((state) => state.changeQuestion);
   const beginScoring = useGameStore((state) => state.beginScoring);
   const recoverTimer = useGameStore((state) => state.recoverTimer);
@@ -153,9 +154,22 @@ export default function GamePage() {
             Revelar respostas
           </Button>
         ) : (
-          <p className="min-h-14 content-center text-center text-sm font-bold text-muted">
-            Todo mundo escrevendo…
-          </p>
+          <div className="grid gap-2">
+            <p className="text-center text-xs font-bold text-muted">
+              Todo mundo já respondeu?
+            </p>
+            <Button
+              fullWidth
+              variant="secondary"
+              leadingIcon={<Square size={18} fill="currentColor" />}
+              onClick={() => {
+                finishTimer();
+                tap();
+              }}
+            >
+              Finalizar timer
+            </Button>
+          </div>
         )}
       </BottomActionBar>
     </PageShell>

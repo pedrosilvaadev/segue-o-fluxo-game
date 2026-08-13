@@ -53,6 +53,7 @@ export interface GameStore extends PersistedGameStore {
   startGame: () => void;
   startRound: () => void;
   startTimer: (now?: number) => void;
+  finishTimer: (now?: number) => void;
   changeQuestion: () => void;
   beginScoring: () => void;
   addScore: (playerId: string, points: number) => void;
@@ -479,6 +480,24 @@ export const useGameStore = create<GameStore>()(
                 timer: {
                   status: "running",
                   endsAt: createTimerEnd(game.settings.timerSeconds, now),
+                },
+              },
+            };
+          });
+        },
+
+        finishTimer(now = Date.now()) {
+          set((state) => {
+            const game = requireGame(state.game);
+            if (game.status !== "playing" || game.timer.status !== "running") {
+              throw new Error("O timer precisa estar em andamento para ser finalizado.");
+            }
+            return {
+              game: {
+                ...game,
+                timer: {
+                  status: "finished",
+                  endsAt: now,
                 },
               },
             };
