@@ -5,7 +5,11 @@ import { ArrowRight, Check, Trophy } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useRouter } from "next/navigation";
 
-import { GameRouteLoading, PlayerScoreRow } from "@/components/game";
+import {
+  GameRouteLoading,
+  PlayerScoreRow,
+  ResetGameButton,
+} from "@/components/game";
 import {
   BottomActionBar,
   PageContainer,
@@ -95,6 +99,7 @@ export default function ScorePage() {
           eyebrow={`Rodada ${game.currentRound} de ${game.settings.rounds}`}
           title="Quem pontuou?"
           description="O grupo decide. Registre de 0 a 3 pontos para cada pessoa."
+          trailing={<ResetGameButton />}
         />
 
         <ul className="space-y-3" aria-label="Pontuação da rodada">

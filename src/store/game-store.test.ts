@@ -143,4 +143,21 @@ describe("game store", () => {
     expect(game?.players).toHaveLength(3);
     expect(game?.questions).toEqual([]);
   });
+
+  it("resets the entire game and its persisted history", () => {
+    createConfiguredGame();
+    useGameStore.getState().startGame();
+
+    expect(useGameStore.getState().game).not.toBeNull();
+    expect(useGameStore.getState().usedQuestionIds.length).toBeGreaterThan(0);
+    expect(localStorage.getItem(STORAGE_KEYS.usedQuestions)).not.toBeNull();
+
+    useGameStore.getState().resetGameFromScratch();
+
+    expect(useGameStore.getState().game).toBeNull();
+    expect(useGameStore.getState().roundScores).toEqual({});
+    expect(useGameStore.getState().usedQuestionIds).toEqual([]);
+    expect(localStorage.getItem(STORAGE_KEYS.usedQuestions)).toBeNull();
+    expect(localStorage.getItem(STORAGE_KEYS.preferences)).toBeNull();
+  });
 });

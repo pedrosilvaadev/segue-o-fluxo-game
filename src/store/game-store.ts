@@ -63,6 +63,7 @@ export interface GameStore extends PersistedGameStore {
   restartGame: () => void;
   reopenSetup: () => void;
   resetGame: () => void;
+  resetGameFromScratch: () => void;
   recoverTimer: (now?: number) => void;
   setHasHydrated: (hasHydrated: boolean) => void;
 }
@@ -664,6 +665,13 @@ export const useGameStore = create<GameStore>()(
 
         resetGame() {
           set({ game: null, roundScores: {} });
+        },
+
+        resetGameFromScratch() {
+          removeStorageItem(STORAGE_KEYS.game);
+          removeStorageItem(STORAGE_KEYS.usedQuestions);
+          removeStorageItem(STORAGE_KEYS.preferences);
+          set({ game: null, roundScores: {}, usedQuestionIds: [] });
         },
 
         recoverTimer(now = Date.now()) {

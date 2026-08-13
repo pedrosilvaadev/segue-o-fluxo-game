@@ -89,3 +89,29 @@ test("recupera rodada e timer em andamento após refresh", async ({ page }) => {
   await page.clock.fastForward(26_000);
   await expect(page.getByRole("button", { name: "Revelar respostas" })).toBeVisible();
 });
+
+test("reinicia uma partida ativa do zero somente após confirmação", async ({
+  page,
+}) => {
+  await createFiveRoundGame(page);
+
+  await page.getByRole("button", { name: "Reiniciar jogo do zero" }).click();
+  await expect(
+    page.getByRole("alertdialog", { name: "Reiniciar do zero?" }),
+  ).toBeVisible();
+
+  await page.getByRole("button", { name: "Continuar partida" }).click();
+  await expect(page).toHaveURL(/\/game$/);
+
+  await page.getByRole("button", { name: "Reiniciar jogo do zero" }).click();
+  await page.getByRole("button", { name: "Sim, reiniciar tudo" }).click();
+
+  await expect(page).toHaveURL(/\/setup$/);
+  await expect(page.getByLabel("Nome do jogador")).toBeVisible();
+  await expect(page.getByText("0/10 jogadores")).toBeVisible();
+  expect(
+    await page.evaluate(() =>
+      window.localStorage.getItem("segue-o-fluxo:used-questions"),
+    ),
+  ).toBeNull();
+});

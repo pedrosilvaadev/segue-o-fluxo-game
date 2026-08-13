@@ -8,6 +8,7 @@ import {
   GameRouteLoading,
   GameTimer,
   QuestionCard,
+  ResetGameButton,
   RoundProgress,
 } from "@/components/game";
 import { BottomActionBar, PageContainer, PageShell } from "@/components/layout";
@@ -102,7 +103,11 @@ export default function GamePage() {
   return (
     <PageShell>
       <PageContainer className="pb-4">
-        <RoundProgress current={game.currentRound} total={game.settings.rounds} />
+        <RoundProgress
+          current={game.currentRound}
+          total={game.settings.rounds}
+          action={<ResetGameButton />}
+        />
         <QuestionCard
           questionId={question.id}
           text={question.text}
