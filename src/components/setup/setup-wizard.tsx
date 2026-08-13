@@ -74,7 +74,6 @@ export function SetupWizard() {
           eyebrow="Nova partida"
           title={step === 1 ? "Quem vai jogar?" : step === 2 ? "Quantas rodadas?" : "Tempo para responder"}
           description={step === 1 ? "Adicione de 3 a 10 pessoas. Nomes diferentes ajudam na hora de pontuar." : step === 2 ? "Escolha o tamanho ideal para o ritmo da galera." : "O cronômetro vale para todas as perguntas."}
-          leading={step > 1 ? <button type="button" aria-label="Voltar uma etapa" onClick={() => setStep((current) => current - 1)} className="grid size-11 place-items-center rounded-full border border-border bg-surface text-foreground"><ArrowLeft size={21} /></button> : undefined}
         />
         <StepIndicator steps={steps} currentStep={step} className="mb-8" />
 
@@ -113,10 +112,23 @@ export function SetupWizard() {
         {error ? <InlineError className="mt-4">{error}</InlineError> : null}
       </PageContainer>
 
-      <BottomActionBar>
+      <BottomActionBar className="space-y-2">
         <Button fullWidth onClick={goForward} trailingIcon={<ArrowRight size={20} />} disabled={step === 1 && game.players.length < 3}>
           {step === 3 ? "Revisar partida" : "Continuar"}
         </Button>
+        {step > 1 ? (
+          <Button
+            fullWidth
+            variant="quiet"
+            leadingIcon={<ArrowLeft size={20} />}
+            onClick={() => {
+              setError(null);
+              setStep((current) => current - 1);
+            }}
+          >
+            Voltar
+          </Button>
+        ) : null}
       </BottomActionBar>
     </PageShell>
   );

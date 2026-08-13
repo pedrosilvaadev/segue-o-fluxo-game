@@ -50,6 +50,20 @@ describe("SetupWizard", () => {
 
     await user.click(screen.getByRole("button", { name: "Continuar" }));
     expect(screen.getByRole("heading", { name: "Quantas rodadas?" })).toBeVisible();
+    expect(
+      screen.queryByRole("button", { name: "Voltar uma etapa" }),
+    ).not.toBeInTheDocument();
+
+    const continueButton = screen.getByRole("button", { name: "Continuar" });
+    const backButton = screen.getByRole("button", { name: "Voltar" });
+    expect(
+      continueButton.compareDocumentPosition(backButton) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+
+    await user.click(backButton);
+    expect(screen.getByRole("heading", { name: "Quem vai jogar?" })).toBeVisible();
+    await user.click(screen.getByRole("button", { name: "Continuar" }));
     expect(screen.getByRole("list", { name: "Etapas da configuração" }).children[1]).toHaveAttribute("aria-current", "step");
 
     await user.click(screen.getByRole("radio", { name: /^5Rápido$/ }));
