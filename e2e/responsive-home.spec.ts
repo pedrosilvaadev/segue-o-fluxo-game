@@ -30,3 +30,26 @@ for (const viewport of viewports) {
     expect(runtimeErrors, runtimeErrors.join("\n")).toEqual([]);
   });
 }
+
+test("apresenta o onboarding completo de como jogar", async ({ page }) => {
+  await page.goto("/");
+
+  await page.getByRole("button", { name: "Como jogar?" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Prepare a galera" }),
+  ).toBeVisible();
+
+  await page.getByRole("button", { name: "Próximo" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Pense rápido" }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Próximo" }).click();
+  await expect(page.getByText("Ana — Pizza")).toBeVisible();
+  await page.getByRole("button", { name: "Próximo" }).click();
+
+  await expect(
+    page.getByRole("heading", { name: "Descubra quem fluiu" }),
+  ).toBeVisible();
+  await page.getByRole("link", { name: "Entendi, começar" }).click();
+  await expect(page).toHaveURL(/\/setup$/);
+});

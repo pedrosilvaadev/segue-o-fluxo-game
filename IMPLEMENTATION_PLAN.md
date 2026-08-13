@@ -141,6 +141,10 @@ as entregas.
 - Validacao final: 37 testes unitarios/componentes, 7 E2E, lint, TypeScript e
   build passaram. As cinco viewports-alvo ficaram sem overflow horizontal,
   erros de console, `pageerror` ou hidratacao.
+- O antigo resumo "Como jogar?" foi evoluido para um onboarding acessivel de
+  quatro etapas, com exemplos visuais, progresso, navegacao e CTA para o setup.
+- Validacao apos o onboarding: 40 testes unitarios/componentes, 9 E2E,
+  TypeScript, lint e build passaram.
 - QA de fechamento adicionou testes de componente para o wizard de setup,
   seletores, limites de pontuacao e progresso acessivel; 37 testes passaram.
 - A home foi validada via Playwright nas cinco resolucoes requeridas, sem

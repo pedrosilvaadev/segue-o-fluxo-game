@@ -2,6 +2,7 @@ import { ArrowRight, Bolt, CircleHelp, Sparkles, Users } from "lucide-react";
 import Link from "next/link";
 
 import { PageContainer, PageShell } from "@/components/layout";
+import { HowToPlayOnboarding } from "@/components/home/how-to-play-onboarding";
 
 const primaryLink =
   "inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-control border border-primary-strong bg-primary-strong px-6 py-3 font-display text-base font-extrabold text-white shadow-[var(--shadow-button)] transition-[transform,background-color,box-shadow] hover:bg-primary active:translate-y-[5px] active:shadow-[var(--shadow-button-active)] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-accent";
@@ -56,27 +57,7 @@ export function HomeScreen() {
             Começar jogo <ArrowRight size={21} aria-hidden="true" />
           </Link>
 
-          <details className="group rounded-card border border-border bg-surface/80 p-1">
-            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-center gap-2 rounded-[1.4rem] px-4 font-bold text-muted transition-colors hover:bg-white/5 hover:text-foreground focus-visible:outline-3 focus-visible:outline-accent">
-              <CircleHelp size={19} aria-hidden="true" /> Como jogar?
-            </summary>
-            <div className="border-t border-border px-4 py-4 text-left text-sm leading-relaxed text-muted">
-              <ol className="space-y-2">
-                <li>
-                  <strong className="text-foreground">1.</strong> Cada pessoa
-                  escreve sua resposta no papel.
-                </li>
-                <li>
-                  <strong className="text-foreground">2.</strong> O grupo revela
-                  tudo junto quando o tempo acabar.
-                </li>
-                <li>
-                  <strong className="text-foreground">3.</strong> Respostas que
-                  entraram no fluxo ganham pontos.
-                </li>
-              </ol>
-            </div>
-          </details>
+          <HowToPlayOnboarding />
         </div>
       </PageContainer>
     </PageShell>
