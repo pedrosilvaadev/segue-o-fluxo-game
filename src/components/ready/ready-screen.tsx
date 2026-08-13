@@ -75,16 +75,6 @@ export function ReadyScreen() {
           eyebrow="A galera está no fluxo"
           title="Tudo pronto?"
           description="Separem papel e caneta. O gerente controla o celular e ninguém espia a resposta dos outros!"
-          leading={
-            <button
-              type="button"
-              onClick={handleBack}
-              aria-label="Voltar à configuração"
-              className="grid size-11 place-items-center rounded-full border border-border bg-surface"
-            >
-              <ArrowLeft size={21} />
-            </button>
-          }
         />
 
         <section
@@ -134,7 +124,7 @@ export function ReadyScreen() {
         {error ? <InlineError className="mt-4">{error}</InlineError> : null}
       </PageContainer>
 
-      <BottomActionBar>
+      <BottomActionBar className="space-y-2">
         <Button
           fullWidth
           onClick={handleStart}
@@ -142,6 +132,14 @@ export function ReadyScreen() {
           className="animate-game-pulse"
         >
           Começar jogo
+        </Button>
+        <Button
+          fullWidth
+          variant="quiet"
+          leadingIcon={<ArrowLeft size={20} />}
+          onClick={handleBack}
+        >
+          Voltar
         </Button>
       </BottomActionBar>
     </PageShell>

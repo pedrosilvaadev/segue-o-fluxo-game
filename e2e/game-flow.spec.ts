@@ -61,6 +61,29 @@ test("mantém os indicadores da tela ready afastados das bordas em 375px", async
   }
 });
 
+test("exibe a ação voltar abaixo de começar jogo na tela ready", async ({
+  page,
+}) => {
+  await createFiveRoundGame(page, { start: false });
+
+  const startButton = page.getByRole("button", { name: "Começar jogo" });
+  const backButton = page.getByRole("button", { name: "Voltar" });
+  const [startBox, backBox] = await Promise.all([
+    startButton.boundingBox(),
+    backButton.boundingBox(),
+  ]);
+
+  expect(startBox).not.toBeNull();
+  expect(backBox).not.toBeNull();
+  expect(backBox!.y).toBeGreaterThan(startBox!.y);
+
+  await backButton.click();
+  await expect(page).toHaveURL(/\/setup$/);
+  await expect(
+    page.getByRole("heading", { name: "Quem vai jogar?" }),
+  ).toBeVisible();
+});
+
 async function expireTimer(page: Page) {
   await page.getByRole("button", { name: "Iniciar timer" }).click({ force: true });
   await page.clock.fastForward(31_000);
