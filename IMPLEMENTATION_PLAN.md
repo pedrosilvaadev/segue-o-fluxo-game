@@ -6,11 +6,11 @@ as entregas.
 
 ## Estado de retomada
 
-- Status atual: Fase 4 em andamento
+- Status atual: MVP concluido e validado
 - Ultima atualizacao: 2026-08-13
 - Especificacao: `doc.md` lido integralmente (87 secoes)
 - Stack: Next.js 16.3.0, React 19.2.8, TypeScript 5, Tailwind CSS 4
-- Proximo marco: implementar as seis telas e o fluxo jogavel
+- Proximo marco: evolucoes futuras de conteudo, PWA ou distribuicao
 
 ## Ownership ativo
 
@@ -88,24 +88,33 @@ as entregas.
 ## Fase 6 - Qualidade
 
 - [x] Testes unitarios: shuffle, selecao, ranking, timer, restart e historico
-- [ ] Testes de componentes: setup, seletores, score e progressao
+- [x] Testes de componentes: setup, seletores, score e progressao
 - [x] E2E: partida completa de 5 rodadas
 - [x] E2E: refresh durante partida e timer
 - [x] Executar `npm run lint`
 - [x] Executar `npx tsc --noEmit`
-- [x] Executar testes (32 unitarios)
+- [x] Executar testes (37 unitarios e de componentes)
 - [x] Executar `npm run build`
-- [ ] Validar 375x812, 390x844, 430x932, 768x1024 e 1440x900
-- [ ] Confirmar ausencia de erros de console e hidratacao
+- [x] Validar 375x812, 390x844, 430x932, 768x1024 e 1440x900
+- [x] Confirmar ausencia de erros de console e hidratacao
 
 ## Fase 7 - Revisao e entrega
 
 - [x] Review de arquitetura, React, Next, TypeScript e estado
 - [x] Review de acessibilidade, mobile UX e motion
 - [x] Corrigir problemas Critical e principais Important
-- [ ] Conferir Definition of Done e criterios de sucesso do `doc.md`
-- [ ] Registrar limitacoes e proximos passos
-- [ ] Entregar resumo final de arquivos e validacoes
+- [x] Conferir Definition of Done e criterios de sucesso do `doc.md`
+- [x] Registrar limitacoes e proximos passos
+- [x] Entregar resumo final de arquivos e validacoes
+
+## Limitacoes e proximos passos
+
+- O catalogo inicial possui 126 perguntas, acima do minimo de 100, mas pode ser
+  ampliado futuramente para a faixa de 250 a 500 sugerida para producao.
+- PWA, offline completo, sons, modos e multiplayer permanecem fora do MVP,
+  conforme os non-goals da especificacao.
+- A validacao automatizada cobre o fluxo completo em mobile e a home nas cinco
+  viewports-alvo; novas features devem ampliar os cenarios E2E correspondentes.
 
 ## Decisoes confirmadas
 
@@ -129,4 +138,11 @@ as entregas.
 - As seis rotas do MVP foram implementadas e o fluxo completo esta jogavel.
 - Review especializado corrigiu timer expirado, overflow em 375px, navegacao de
   restart, reduced motion, landmarks, contraste e semantica do ranking.
-- Validacao final: 32 testes unitarios, 2 E2E, lint, TypeScript e build passaram.
+- Validacao final: 37 testes unitarios/componentes, 7 E2E, lint, TypeScript e
+  build passaram. As cinco viewports-alvo ficaram sem overflow horizontal,
+  erros de console, `pageerror` ou hidratacao.
+- QA de fechamento adicionou testes de componente para o wizard de setup,
+  seletores, limites de pontuacao e progresso acessivel; 37 testes passaram.
+- A home foi validada via Playwright nas cinco resolucoes requeridas, sem
+  overflow horizontal, `pageerror`, erro de console ou erro de hidratacao;
+  a suite E2E completa passou com 7 cenarios.
