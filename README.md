@@ -1,101 +1,99 @@
 # Segue o Fluxo
 
-Jogo de festa local, mobile-first, para descobrir quem pensa mais parecido com
-o grupo.
+A local, mobile-first party game about finding out who thinks most like the
+group.
 
-Uma pessoa controla a partida em um único celular. Os demais jogadores usam
-papel e caneta para responder às perguntas, revelam as respostas juntos e o
-grupo decide quem pontuou. Não há login, backend ou necessidade de vários
-dispositivos.
+One person manages the match on a single phone. Everyone else uses pen and
+paper to answer questions, reveals their answers together, and lets the group
+decide who scored. There is no login, backend, or multi-device requirement.
 
-## O jogo
+## The game
 
-O fluxo de uma partida é simples:
+A match follows a simple loop:
 
 ```text
-Configurar jogadores
-        ↓
-Escolher rodadas e tempo
-        ↓
-Responder à pergunta no papel
-        ↓
-Revelar as respostas
-        ↓
-Registrar os pontos
-        ↓
-Descobrir o ranking final
+Set up players
+      ↓
+Choose rounds and timer
+      ↓
+Answer the question on paper
+      ↓
+Reveal all answers
+      ↓
+Record the scores
+      ↓
+Discover the final ranking
 ```
 
-O aplicativo inclui um onboarding interativo em **Como jogar?**, pensado para
-explicar as regras a grupos que nunca jogaram.
+The app includes an interactive **How to play** onboarding flow designed to
+teach the rules to first-time groups.
 
-## Funcionalidades
+## Features
 
-- Cadastro de 3 a 10 jogadores.
-- Partidas de 5, 10, 15 ou 20 rodadas.
-- Timer configurável de 30, 45 ou 60 segundos.
-- Timer preciso e recuperável após refresh, baseado em um horário final
-  absoluto (`endsAt`).
-- 126 perguntas locais distribuídas em nove categorias.
-- Seleção de perguntas com Fisher–Yates e prevenção de repetições.
-- Pontuação flexível de 0 a 3 pontos por jogador e rodada.
-- Ranking final com suporte a empates (`1, 1, 3`).
-- Persistência automática da partida no LocalStorage.
-- Recuperação de jogadores, rodada, placar, perguntas e timer.
-- Opção de jogar novamente mantendo jogadores e configurações.
-- Opção de iniciar uma nova partida ou reiniciar tudo durante o jogo.
-- Animações, feedback háptico opcional e suporte a movimento reduzido.
-- Layout mobile-first com moldura de aplicativo em telas maiores.
-- Fluxo acessível por teclado, controles com alvos de toque adequados e foco
-  visível.
+- 3 to 10 players.
+- Matches with 5, 10, 15, or 20 rounds.
+- Configurable 30, 45, or 60-second timer.
+- Drift-resistant timer recovery after refresh, based on an absolute `endsAt`
+  timestamp.
+- 126 local questions spread across nine categories.
+- Fisher–Yates question selection with repetition prevention.
+- Flexible scoring from 0 to 3 points per player and round.
+- Final ranking with tie support (`1, 1, 3`).
+- Automatic game persistence in LocalStorage.
+- Recovery of players, current round, scores, questions, and timer.
+- Play again while keeping players and settings.
+- Start a new match or reset everything during an active game.
+- Motion, optional haptic feedback, and reduced-motion support.
+- Mobile-first layout with an app-like frame on larger screens.
+- Keyboard-accessible flow, visible focus states, and touch-friendly controls.
 
-## Rotas
+## Routes
 
-| Rota | Responsabilidade |
+| Route | Responsibility |
 | --- | --- |
-| `/` | Apresentação do jogo e onboarding “Como jogar?” |
-| `/setup` | Cadastro de jogadores, rodadas e timer |
-| `/ready` | Revisão da configuração antes da partida |
-| `/game` | Pergunta atual, progresso e cronômetro |
-| `/game/score` | Pontuação dos jogadores na rodada |
-| `/results` | Revelação do vencedor e ranking final |
+| `/` | Game introduction and “How to play” onboarding |
+| `/setup` | Player, round, and timer configuration |
+| `/ready` | Match configuration review |
+| `/game` | Current question, progress, and timer |
+| `/game/score` | Round scoring |
+| `/results` | Winner reveal and final ranking |
 
-As rotas protegidas aguardam a hidratação do estado local antes de decidir se
-devem renderizar ou redirecionar. Isso evita perda de sessão e falsos
-redirecionamentos durante a inicialização.
+Protected routes wait for local state hydration before rendering or
+redirecting. This prevents lost sessions and incorrect redirects during app
+startup.
 
-## Tecnologias
+## Tech stack
 
-- [Next.js 16](https://nextjs.org/) com App Router
+- [Next.js 16](https://nextjs.org/) with App Router
 - [React 19](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS 4](https://tailwindcss.com/)
-- [Zustand](https://zustand.docs.pmnd.rs/) para estado e persistência
-- [Motion](https://motion.dev/) para animações
-- [Lucide](https://lucide.dev/) para ícones
-- [Vitest](https://vitest.dev/) e Testing Library
-- [Playwright](https://playwright.dev/) para testes E2E
+- [Zustand](https://zustand.docs.pmnd.rs/) for state and persistence
+- [Motion](https://motion.dev/) for animations
+- [Lucide](https://lucide.dev/) for icons
+- [Vitest](https://vitest.dev/) and Testing Library
+- [Playwright](https://playwright.dev/) for end-to-end tests
 
-## Requisitos
+## Requirements
 
-- Node.js 20.9 ou superior
+- Node.js 20.9 or newer
 - npm
 
-O projeto não exige variáveis de ambiente nem serviços externos.
+The project does not require environment variables or external services.
 
-## Executando localmente
+## Running locally
 
 ```bash
-git clone <url-do-repositorio>
+git clone <repository-url>
 cd segue-o-fluxo
 npm install
 npm run dev
 ```
 
-Acesse [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000).
 
-Para executar os testes E2E pela primeira vez, instale o Chromium usado pelo
-Playwright:
+Before running the E2E suite for the first time, install Playwright's Chromium
+browser:
 
 ```bash
 npx playwright install chromium
@@ -103,18 +101,18 @@ npx playwright install chromium
 
 ## Scripts
 
-| Comando | Descrição |
+| Command | Description |
 | --- | --- |
-| `npm run dev` | Inicia o servidor de desenvolvimento |
-| `npm run build` | Gera o build otimizado de produção |
-| `npm run start` | Executa o build de produção |
-| `npm run lint` | Analisa o código com ESLint |
-| `npm run typecheck` | Valida os tipos sem gerar arquivos |
-| `npm test` | Executa o Vitest em modo interativo |
-| `npm run test:run` | Executa testes unitários e de componentes uma vez |
-| `npm run test:e2e` | Executa os testes E2E no Chromium |
+| `npm run dev` | Starts the development server |
+| `npm run build` | Creates an optimized production build |
+| `npm run start` | Runs the production build |
+| `npm run lint` | Checks the codebase with ESLint |
+| `npm run typecheck` | Validates types without emitting files |
+| `npm test` | Runs Vitest in watch mode |
+| `npm run test:run` | Runs unit and component tests once |
+| `npm run test:e2e` | Runs the E2E suite in Chromium |
 
-Antes de entregar uma mudança, execute:
+Before shipping a change, run:
 
 ```bash
 npm run typecheck
@@ -124,38 +122,38 @@ npm run test:e2e
 npm run build
 ```
 
-## Estrutura do projeto
+## Project structure
 
 ```text
 app/
 ├── page.tsx                 # Home
-├── setup/page.tsx           # Configuração
-├── ready/page.tsx           # Revisão da partida
-├── game/page.tsx            # Rodada e timer
-├── game/score/page.tsx      # Pontuação
-└── results/page.tsx         # Resultado final
+├── setup/page.tsx           # Game setup
+├── ready/page.tsx           # Match review
+├── game/page.tsx            # Current round and timer
+├── game/score/page.tsx      # Round scoring
+└── results/page.tsx         # Final results
 
 src/
 ├── components/
-│   ├── game/                # Pergunta, timer, progresso e pontuação
-│   ├── home/                # Home e onboarding
-│   ├── layout/              # Estrutura compartilhada das telas
-│   ├── motion/              # Revelações e celebrações
-│   ├── results/             # Vencedor e ranking
-│   ├── setup/               # Wizard de configuração
-│   └── ui/                  # Primitivos visuais reutilizáveis
-├── data/questions.ts        # Catálogo local de perguntas
-├── hooks/                   # Timer e feedback háptico
-├── lib/                     # Regras puras, shuffle e storage
-├── store/game-store.ts      # Estado persistente e ações do jogo
-└── types/                   # Modelos TypeScript
+│   ├── game/                # Question, timer, progress, and scoring
+│   ├── home/                # Home screen and onboarding
+│   ├── layout/              # Shared screen structure
+│   ├── motion/              # Reveals and celebrations
+│   ├── results/             # Winner and leaderboard
+│   ├── setup/               # Setup wizard
+│   └── ui/                  # Reusable visual primitives
+├── data/questions.ts        # Local question catalog
+├── hooks/                   # Timer and haptic feedback
+├── lib/                     # Pure game rules, shuffle, and storage
+├── store/game-store.ts      # Persistent state and game actions
+└── types/                   # TypeScript domain models
 
-e2e/                         # Fluxos críticos e testes responsivos
+e2e/                         # Critical flows and responsive checks
 ```
 
-## Estado e persistência
+## State and persistence
 
-O MVP é totalmente frontend. O estado é persistido sob três chaves:
+The MVP is entirely frontend-based. State is stored under three keys:
 
 ```text
 segue-o-fluxo:game
@@ -163,74 +161,74 @@ segue-o-fluxo:used-questions
 segue-o-fluxo:preferences
 ```
 
-O acesso ao LocalStorage fica centralizado em `src/lib/storage.ts`; componentes
-não leem nem escrevem diretamente no armazenamento.
+LocalStorage access is centralized in `src/lib/storage.ts`. Components never
+read from or write to storage directly.
 
-### Reinícios disponíveis
+### Reset options
 
-- **Jogar novamente:** mantém jogadores, quantidade de rodadas e timer; zera
-  placares e seleciona novas perguntas.
-- **Nova partida:** volta ao cadastro inicial.
-- **Reiniciar do zero:** durante uma partida, apaga configuração, jogadores,
-  progresso e histórico após confirmação explícita.
+- **Play again:** keeps players, round count, and timer settings while resetting
+  scores and selecting new questions.
+- **New match:** returns to the initial player setup.
+- **Reset from scratch:** during an active game, removes settings, players,
+  progress, and question history after explicit confirmation.
 
-## Regras de domínio
+## Domain rules
 
-- Nomes são obrigatórios, limitados a 20 caracteres e únicos sem diferenciar
-  maiúsculas de minúsculas.
-- Cada jogador recebe entre 0 e 3 pontos por rodada.
-- Perguntas não se repetem dentro da mesma partida.
-- O histórico recente tem limite de 100 perguntas e é reiniciado
-  automaticamente quando não há perguntas inéditas suficientes.
-- Empates compartilham a mesma colocação; a posição seguinte é pulada.
-- Uma rodada zerada não concede vitória de rodada.
+- Player names are required, limited to 20 characters, and unique regardless
+  of letter case.
+- Each player can receive between 0 and 3 points per round.
+- Questions never repeat within the same match.
+- Recent question history is limited to 100 entries and automatically resets
+  when there are not enough unseen questions.
+- Tied players share the same position and the following position is skipped.
+- A round where everyone scores zero does not award a round win.
 
-As regras puras vivem fora dos componentes React, principalmente em
-`src/lib/game.ts` e `src/lib/shuffle.ts`.
+Pure game rules live outside React components, primarily in `src/lib/game.ts`
+and `src/lib/shuffle.ts`.
 
-## Testes e qualidade
+## Testing and quality
 
-A suíte cobre:
+The automated suite covers:
 
-- shuffle e imutabilidade;
-- seleção e histórico de perguntas;
-- ranking e empates;
-- cálculos e recuperação do timer;
-- reinício de partida;
-- store e persistência;
-- wizard, seletores, pontuação e progresso;
-- onboarding completo;
-- partida E2E de cinco rodadas;
-- refresh durante o timer;
-- reinício completo durante a partida;
-- ausência de overflow e erros de console nas viewports `375x812`, `390x844`,
-  `430x932`, `768x1024` e `1440x900`.
+- shuffle behavior and immutability;
+- question selection and history;
+- ranking and ties;
+- timer calculations and recovery;
+- match restart behavior;
+- store actions and persistence;
+- setup wizard, selectors, scoring, and progress;
+- the complete onboarding flow;
+- a five-round E2E match;
+- refresh during an active timer;
+- full reset during an active match;
+- horizontal overflow and console errors at `375x812`, `390x844`, `430x932`,
+  `768x1024`, and `1440x900`.
 
-## Princípios de implementação
+## Implementation principles
 
-- Mobile-first e amigável para uso com uma mão.
-- Ações principais próximas ao rodapé.
-- Lógica de domínio fora dos componentes.
-- Client Components somente quando há interação ou APIs do navegador.
-- Sem backend, autenticação, API routes ou abstrações desnecessárias.
-- Animações devem comunicar estado, urgência ou celebração.
-- `prefers-reduced-motion` deve ser respeitado.
-- A interface deve parecer um jogo de festa, não um dashboard.
+- Mobile-first and comfortable for one-handed use.
+- Primary actions stay near the bottom of the screen.
+- Domain logic stays outside React components.
+- Client Components are used only for interaction or browser APIs.
+- No backend, authentication, API routes, or unnecessary abstractions.
+- Motion should communicate state, urgency, or celebration.
+- `prefers-reduced-motion` must be respected.
+- The interface should feel like a party game, not a dashboard.
 
-## Documentação do desenvolvimento
+## Development documentation
 
-- [Especificação do produto](./doc.md)
-- [Plano e checklist de implementação](./IMPLEMENTATION_PLAN.md)
+- [Product specification](./doc.md)
+- [Implementation plan and checklist](./IMPLEMENTATION_PLAN.md)
 
-## Próximos passos possíveis
+## Possible next steps
 
-- Expandir o catálogo para 250–500 perguntas.
-- Packs e seleção de categorias.
-- Perguntas personalizadas.
-- Sons opcionais e preferências locais.
-- Novas regras e modos de pontuação.
-- PWA e suporte offline completo.
-- Histórico de partidas e estatísticas locais.
-- Compartilhamento do resultado como imagem.
+- Expand the catalog to 250–500 questions.
+- Add question packs and category selection.
+- Support custom questions.
+- Add optional sounds and local preferences.
+- Introduce new scoring rules and game modes.
+- Add PWA and full offline support.
+- Store local match history and player statistics.
+- Generate shareable result images.
 
-Esses itens são evoluções futuras e não fazem parte do MVP atual.
+These are potential future improvements and are not part of the current MVP.
