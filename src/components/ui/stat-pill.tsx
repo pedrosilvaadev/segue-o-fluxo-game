@@ -8,13 +8,23 @@ export interface StatPillProps {
   value?: string | number;
   className?: string;
   tone?: "default" | "primary" | "accent" | "success";
+  layout?: "inline" | "stacked";
 }
 
-export function StatPill({ icon, label, value, className, tone = "default" }: StatPillProps) {
+export function StatPill({
+  icon,
+  label,
+  value,
+  className,
+  tone = "default",
+  layout = "inline",
+}: StatPillProps) {
   return (
     <span
       className={cn(
         "inline-flex min-h-11 items-center gap-2 rounded-full border px-3 py-2 text-sm font-bold",
+        layout === "stacked" &&
+          "min-w-0 flex-col justify-center gap-1 rounded-control px-2 py-3 text-center text-xs [&>strong]:text-xl [&>strong]:leading-none",
         tone === "default" && "border-border bg-surface-raised text-foreground",
         tone === "primary" && "border-primary/45 bg-primary/15 text-primary-soft",
         tone === "accent" && "border-accent/45 bg-accent/12 text-accent",

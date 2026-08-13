@@ -87,22 +87,28 @@ export function ReadyScreen() {
           }
         />
 
-        <section className="relative rotate-[-0.6deg] rounded-card border border-border-strong bg-surface p-5 shadow-card">
-          <div className="grid grid-cols-1 gap-2 min-[390px]:grid-cols-3">
+        <section
+          aria-label="Resumo da partida"
+          className="relative rotate-[-0.6deg] rounded-card border border-border-strong bg-surface p-5 shadow-card"
+        >
+          <div className="grid grid-cols-3 gap-2">
             <StatPill
               label="Jogadores"
               value={String(game.players.length)}
               icon={<UsersRound size={18} />}
+              layout="stacked"
             />
             <StatPill
               label="Rodadas"
               value={String(game.settings.rounds)}
               icon={<Target size={18} />}
+              layout="stacked"
             />
             <StatPill
               label="Segundos"
               value={String(game.settings.timerSeconds)}
               icon={<Clock3 size={18} />}
+              layout="stacked"
             />
           </div>
           <div className="my-5 h-px bg-border" />

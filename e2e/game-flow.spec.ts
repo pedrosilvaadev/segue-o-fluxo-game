@@ -2,7 +2,10 @@ import { expect, type Page, test } from "@playwright/test";
 
 const GAME_STORAGE_KEY = "segue-o-fluxo:game";
 
-async function createFiveRoundGame(page: Page) {
+async function createFiveRoundGame(
+  page: Page,
+  options: { start?: boolean } = {},
+) {
   await page.goto("/");
   await page.evaluate(() => window.localStorage.clear());
   await page.reload();
@@ -23,9 +26,39 @@ async function createFiveRoundGame(page: Page) {
 
   await expect(page).toHaveURL(/\/ready$/);
   await expect(page.getByRole("heading", { name: "Tudo pronto?" })).toBeVisible();
+  if (options.start === false) return;
   await page.getByRole("button", { name: "Começar jogo" }).click({ force: true });
   await expect(page).toHaveURL(/\/game$/);
 }
+
+test("mantém os indicadores da tela ready afastados das bordas em 375px", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await createFiveRoundGame(page, { start: false });
+
+  const summary = page.getByRole("region", { name: "Resumo da partida" });
+
+  for (const label of ["Jogadores", "Rodadas", "Segundos"]) {
+    const card = summary.getByText(label, { exact: true }).locator("..");
+    const spacing = await card.evaluate((element) => {
+      const cardBox = element.getBoundingClientRect();
+      const labelElement = element.children.item(1);
+      const labelBox = labelElement?.getBoundingClientRect();
+
+      return labelBox
+        ? {
+            left: labelBox.left - cardBox.left,
+            right: cardBox.right - labelBox.right,
+          }
+        : null;
+    });
+
+    expect(spacing).not.toBeNull();
+    expect(spacing?.left).toBeGreaterThanOrEqual(8);
+    expect(spacing?.right).toBeGreaterThanOrEqual(8);
+  }
+});
 
 async function expireTimer(page: Page) {
   await page.getByRole("button", { name: "Iniciar timer" }).click({ force: true });
