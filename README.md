@@ -38,7 +38,7 @@ teach the rules to first-time groups.
 - Early timer completion when everyone answers before time runs out.
 - 126 local questions spread across nine categories.
 - Fisher–Yates question selection with repetition prevention.
-- Flexible scoring from 0 to 3 points per player and round.
+- Objective scoring from 0 to 2 points per player and round.
 - Final ranking with tie support (`1, 1, 3`).
 - Automatic game persistence in LocalStorage.
 - Recovery of players, current round, scores, questions, and timer.
@@ -177,7 +177,8 @@ read from or write to storage directly.
 
 - Player names are required, limited to 20 characters, and unique regardless
   of letter case.
-- Each player can receive between 0 and 3 points per round.
+- A unique answer scores 0 points, a matching pair scores 1 point per player,
+  and a group of three or more scores 2 points per player.
 - Questions never repeat within the same match.
 - Recent question history is limited to 100 entries and automatically resets
   when there are not enough unseen questions.

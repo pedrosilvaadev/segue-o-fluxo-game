@@ -2,6 +2,8 @@ import type { Question } from "./question";
 
 export const ROUND_OPTIONS = [5, 10, 15, 20] as const;
 export const TIMER_OPTIONS = [30, 45, 60] as const;
+export const MIN_ROUND_POINTS = 0;
+export const MAX_ROUND_POINTS = 2;
 
 export type RoundCount = (typeof ROUND_OPTIONS)[number];
 export type TimerSeconds = (typeof TIMER_OPTIONS)[number];

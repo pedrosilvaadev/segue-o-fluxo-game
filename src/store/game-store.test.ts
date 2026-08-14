@@ -65,8 +65,8 @@ describe("game store", () => {
     useGameStore.getState().beginScoring();
 
     const players = useGameStore.getState().game?.players ?? [];
-    expect(() => useGameStore.getState().addScore(players[0].id, 4)).toThrow(
-      "entre 0 e 3",
+    expect(() => useGameStore.getState().addScore(players[0].id, 3)).toThrow(
+      "entre 0 e 2",
     );
 
     useGameStore.getState().addScore(players[0].id, 2);

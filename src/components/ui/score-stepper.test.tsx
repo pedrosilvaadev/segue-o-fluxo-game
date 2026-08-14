@@ -17,9 +17,9 @@ describe("ScoreStepper", () => {
     await user.click(screen.getByRole("button", { name: "Aumentar pontos de Ana" }));
     expect(onChange).toHaveBeenLastCalledWith(1);
 
-    rerender(<ScoreStepper value={3} onChange={onChange} label="Ana" />);
+    rerender(<ScoreStepper value={2} onChange={onChange} label="Ana" />);
     expect(screen.getByRole("button", { name: "Aumentar pontos de Ana" })).toBeDisabled();
     await user.click(screen.getByRole("button", { name: "Diminuir pontos de Ana" }));
-    expect(onChange).toHaveBeenLastCalledWith(2);
+    expect(onChange).toHaveBeenLastCalledWith(1);
   });
 });

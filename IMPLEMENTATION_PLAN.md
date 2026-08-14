@@ -70,7 +70,7 @@ as entregas.
 - [x] Setup `/setup` com jogadores, rodadas e timer
 - [x] Ready `/ready` com resumo e antecipacao
 - [x] Gameplay `/game` com progresso, pergunta e timer preciso
-- [x] Scoring `/game/score` com pontos de 0 a 3
+- [x] Scoring `/game/score` com pontos de 0 a 2
 - [x] Results `/results` com ranking, empates, vencedor e perdedor
 - [x] Play Again preservando configuracao e renovando perguntas
 - [x] New Game limpando a sessao e retornando ao setup

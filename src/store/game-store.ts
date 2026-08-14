@@ -16,6 +16,8 @@ import {
   writeStorageJson,
 } from "../lib/storage";
 import {
+  MAX_ROUND_POINTS,
+  MIN_ROUND_POINTS,
   ROUND_OPTIONS,
   TIMER_OPTIONS,
   type GameState,
@@ -25,14 +27,21 @@ import {
   type TimerSeconds,
 } from "../types/game";
 
-const STORE_VERSION = 1;
+const STORE_VERSION = 2;
 const MIN_PLAYERS = 3;
 const MAX_PLAYERS = 10;
 const MAX_PLAYER_NAME_LENGTH = 20;
-const MIN_ROUND_POINTS = 0;
-const MAX_ROUND_POINTS = 3;
 
 type RoundScores = Record<string, number>;
+
+function clampRoundScores(roundScores: Readonly<RoundScores>): RoundScores {
+  return Object.fromEntries(
+    Object.entries(roundScores).map(([playerId, points]) => [
+      playerId,
+      Math.min(MAX_ROUND_POINTS, Math.max(MIN_ROUND_POINTS, points)),
+    ]),
+  );
+}
 
 interface PersistedGameStore {
   game: GameState | null;
@@ -202,13 +211,13 @@ function migratePersistedState(
   if (version < 1) {
     return {
       game: state.game ?? null,
-      roundScores: state.roundScores ?? {},
+      roundScores: clampRoundScores(state.roundScores ?? {}),
     };
   }
 
   return {
     game: state.game ?? null,
-    roundScores: state.roundScores ?? {},
+    roundScores: clampRoundScores(state.roundScores ?? {}),
   };
 }
 

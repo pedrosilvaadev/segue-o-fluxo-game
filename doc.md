@@ -692,10 +692,11 @@ João
 Recommended allowed score per round:
 
 ```txt
-0–3
+0–2
 ```
 
-This provides flexibility if game rules evolve.
+Unique answers score 0 points, matching pairs score 1 point per player, and
+groups of three or more score 2 points per player.
 
 Alternative simplified MVP:
 

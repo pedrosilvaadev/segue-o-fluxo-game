@@ -36,7 +36,7 @@ const steps = [
     eyebrow: "Quando o tempo acabar",
     title: "Revelem juntos",
     description:
-      "Compare as respostas. O grupo decide quem entrou no fluxo e o gerente registra de 0 a 3 pontos para cada pessoa.",
+      "Compare as respostas. Quem respondeu sozinho ganha 0 ponto; uma dupla ganha 1 ponto para cada; um trio ou grupo maior ganha 2 pontos para cada.",
     visual: "answers",
   },
   {

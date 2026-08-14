@@ -119,7 +119,7 @@ export function ReadyScreen() {
         </section>
 
         <div className="mt-6 rounded-control border border-accent/30 bg-accent/10 px-4 py-3 text-center text-sm font-semibold text-accent">
-          ⚡ As respostas iguais colocam vocês no fluxo.
+          ⚡ Sozinho: 0 · dupla: 1 · trio ou mais: 2 pontos para cada.
         </div>
         {error ? <InlineError className="mt-4">{error}</InlineError> : null}
       </PageContainer>

@@ -1,6 +1,7 @@
 import { Minus, Plus } from "lucide-react";
 
 import { cn } from "@/lib/cn";
+import { MAX_ROUND_POINTS, MIN_ROUND_POINTS } from "@/types/game";
 
 export interface ScoreStepperProps {
   value: number;
@@ -14,8 +15,8 @@ export interface ScoreStepperProps {
 export function ScoreStepper({
   value,
   onChange,
-  min = 0,
-  max = 3,
+  min = MIN_ROUND_POINTS,
+  max = MAX_ROUND_POINTS,
   label,
   className,
 }: ScoreStepperProps) {

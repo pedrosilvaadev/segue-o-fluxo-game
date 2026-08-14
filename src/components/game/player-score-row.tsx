@@ -34,8 +34,6 @@ export function PlayerScoreRow({
       <ScoreStepper
         value={roundPoints}
         onChange={onChange}
-        min={0}
-        max={3}
         label={player.name}
       />
     </motion.li>

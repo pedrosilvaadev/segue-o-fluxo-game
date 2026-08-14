@@ -98,7 +98,7 @@ export default function ScorePage() {
         <ScreenHeader
           eyebrow={`Rodada ${game.currentRound} de ${game.settings.rounds}`}
           title="Quem pontuou?"
-          description="O grupo decide. Registre de 0 a 3 pontos para cada pessoa."
+          description="Resposta única: 0 · dupla: 1 · trio ou mais: 2 pontos para cada pessoa."
           trailing={<ResetGameButton />}
         />
 
